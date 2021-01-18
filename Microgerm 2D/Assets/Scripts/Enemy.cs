@@ -8,9 +8,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool dev = false;
     [SerializeField] private int maxHealth;
     [SerializeField] private Health healthBar;
-    
+    [SerializeField] private GameObject loot;
+    [SerializeField] private Transform dropPoint;
+
 
     private bool isDead;
+    private bool isAlreadyDropItem;
     private int currentHealth;
     private Animator anim;
 
@@ -26,6 +29,7 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         
         isDead = false;
+        isAlreadyDropItem = false;
 
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
@@ -38,6 +42,7 @@ public class Enemy : MonoBehaviour
         {
             GameManager.Instance.RegenHealth();
             isDead = true;
+           
             if (HasParameter("isDead", anim))
             {
                 anim.SetTrigger("isDead");
@@ -45,7 +50,8 @@ public class Enemy : MonoBehaviour
 
             if (isBoss)
             {
-                GameManager.Instance.IncreaseLevel();
+                GameManager.Instance.OpenConfirmation();
+                //GameManager.Instance.IncreaseLevel();
             }
 
             StartCoroutine(ClearEnemy());
@@ -65,8 +71,12 @@ public class Enemy : MonoBehaviour
 
     IEnumerator ClearEnemy()
     {
+        if (isAlreadyDropItem == false)
+        {
+            DropItem();
+            isAlreadyDropItem = true;
+        }
         
-
         if (HasParameter("isDead",anim))
         {
             yield return new WaitForSeconds(1.5f);
@@ -76,6 +86,11 @@ public class Enemy : MonoBehaviour
         }
         
         Destroy(gameObject);
+    }
+
+    private void DropItem()
+    {
+        Instantiate(loot, dropPoint.position, Quaternion.identity);
     }
 
     public void TakeDamage(int damage)

@@ -22,12 +22,16 @@ public class PickUp : MonoBehaviour
                 {
                     // Add item to the inventory
                     inventory.isFull[i] = true;
-                    Instantiate(itemButton, inventory.slots[i].transform, false);
                     inventory.UpdateInventory();
                     Destroy(gameObject);
                     break;
+                    
                 }
             }
+
+            
+
+            //
         }
     }
 }

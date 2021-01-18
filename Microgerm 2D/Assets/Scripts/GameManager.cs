@@ -9,12 +9,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     static public int currentLevel;
 
-    private GameObject pauseCanvas;
-    private GameObject optionsCanvas;
-    private GameObject gameCanvas;
-    private GameObject gameOverCanvas;
-    private GameObject inventoryCanvas;
-    private GameObject player;
+    private GameObject pauseCanvas, optionsCanvas, gameCanvas,
+        gameOverCanvas, inventoryCanvas, player, questionAnswerCanvas, confirmationCanvas;
 
     private bool isGameOver;
 
@@ -78,6 +74,8 @@ public class GameManager : MonoBehaviour
         gameCanvas = GameObject.Find("GameCanvas");
         gameOverCanvas = GameObject.Find("GameOverCanvas");
         inventoryCanvas = GameObject.Find("InventoryCanvas");
+        confirmationCanvas = GameObject.Find("ConfirmationCanvas");
+        questionAnswerCanvas = GameObject.Find("QuestionAnswerCanvas");
     }
 
     private void InitialGraphics()
@@ -87,6 +85,8 @@ public class GameManager : MonoBehaviour
         gameCanvas.SetActive(true);
         gameOverCanvas.SetActive(false);
         inventoryCanvas.SetActive(false);
+        confirmationCanvas.SetActive(false);
+        questionAnswerCanvas.SetActive(false);
     }
 
     private void InitialHealth()
@@ -153,6 +153,7 @@ public class GameManager : MonoBehaviour
 
     public void ExitGame()
     {
+        PlayerPrefs.DeleteAll();
         SceneManager.LoadScene("TitleScene");
     }
 
@@ -161,6 +162,16 @@ public class GameManager : MonoBehaviour
         inventoryCanvas.gameObject.SetActive(true);
         gameCanvas.gameObject.SetActive(false);
         Time.timeScale = 0f;
+    }
+
+    public void ClosedGameCanvas()
+    {
+        gameCanvas.SetActive(false);
+    }
+
+    public void OpenGameCanvas()
+    {
+        gameCanvas.SetActive(true);
     }
 
     public void ClosedInventory()
@@ -200,6 +211,35 @@ public class GameManager : MonoBehaviour
         {
             txt.text = "BGM ON";
         }
+    }
+
+    public void YesQuiz()
+    {
+        // close confirmation 
+        // open question answer canvas
+        // start the quiz
+    }
+
+    public void NoQuiz()
+    {
+        // close confirmation
+        // back to the game
+        ClosedConfirmation();
+
+    }
+
+    public void ClosedConfirmation()
+    {
+        confirmationCanvas.gameObject.SetActive(false);
+        gameCanvas.gameObject.SetActive(true);
+        Time.timeScale = 1f;
+    }
+
+    public void OpenConfirmation()
+    {
+        confirmationCanvas.gameObject.SetActive(true);
+        gameCanvas.gameObject.SetActive(false);
+        Time.timeScale = 0f;
     }
 
     public void SoundEffects(GameObject btn)
