@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73e391429c0f4d4bb8f068f956d9f95, type: 3}
+  m_Name: item1.12
+  m_EditorClassIdentifier: 
+  hint: SARS is caused by a virus that affects the lower respiratory system
+  level: 1
+  prefab: {fileID: 4427265433349833024, guid: a2a58d0572129ee48972f50b18feb849, type: 3}
+  question: SARS is caused by a virus that affects the lower respiratory system
+  isBoolean: 1
+  isTrue: 1
+  correctAnswer: 
+  choices: []

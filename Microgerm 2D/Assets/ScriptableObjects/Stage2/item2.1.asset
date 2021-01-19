@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73e391429c0f4d4bb8f068f956d9f95, type: 3}
+  m_Name: item2.1
+  m_EditorClassIdentifier: 
+  hint: Photosynthetic prokaryotes remove atmospheric carbon dioxide and fix it into
+    sugars
+  level: 2
+  prefab: {fileID: 4427265433349833024, guid: cd0b49e59892b8244b9982cda6fcb102, type: 3}
+  question: If all fungi in an environment that perform decomposition were to suddenly
+    die, then which group of organisms should benefit most, due to the fact their
+    fungal competitors have been removed?
+  isBoolean: 0
+  isTrue: 0
+  correctAnswer: Prokaryotes
+  choices:
+  - Plants
+  - Protists
+  - Prokaryotes
+  - Mutualistic Fungi

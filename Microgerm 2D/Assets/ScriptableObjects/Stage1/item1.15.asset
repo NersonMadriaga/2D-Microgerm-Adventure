@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73e391429c0f4d4bb8f068f956d9f95, type: 3}
+  m_Name: item1.15
+  m_EditorClassIdentifier: 
+  hint: 'Cold sores are caused by certain strains of the herpes simplex virus '
+  level: 1
+  prefab: {fileID: 4427265433349833024, guid: 1d9231c9731c67943be92d1b3e816df7, type: 3}
+  question: The virus causes cold sores
+  isBoolean: 0
+  isTrue: 0
+  correctAnswer: The Herpes virus
+  choices:
+  - The Herpes virus
+  - The Norwalk virus
+  - The Human Papilloma virus
+  - The Rubeola virus

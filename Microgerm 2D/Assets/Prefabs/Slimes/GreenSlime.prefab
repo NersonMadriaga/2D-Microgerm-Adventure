@@ -217,8 +217,9 @@ MonoBehaviour:
   dev: 0
   maxHealth: 100
   healthBar: {fileID: 2765658838495962543}
-  loot: {fileID: 4427265433349833024, guid: e0d8dc1002e30884197a6b29dff10951, type: 3}
+  loot: {fileID: 4427265433349833024, guid: ce2d41286af77a840a8894a824164491, type: 3}
   dropPoint: {fileID: 4071144610269881544}
+  itemIndex: 0
 --- !u!1 &2420804842685346864
 GameObject:
   m_ObjectHideFlags: 0

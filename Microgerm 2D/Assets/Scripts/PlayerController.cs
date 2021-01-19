@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
         {
             dirX = Input.GetAxisRaw("Horizontal") * moveSpeed;
         }
-        //MoveCharacter();
+        MoveCharacter();
 
         if ( dev && Input.GetButtonDown("Jump") && isGrounded)
         {

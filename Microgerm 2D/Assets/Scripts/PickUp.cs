@@ -5,7 +5,8 @@ using UnityEngine;
 public class PickUp : MonoBehaviour
 {
     private Inventory inventory;
-    public GameObject itemButton;
+
+    public Item item;
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class PickUp : MonoBehaviour
                 {
                     // Add item to the inventory
                     inventory.isFull[i] = true;
+                    Instantiate(item.ItemGameObject.prefab, inventory.slots[i].transform, false);
                     inventory.UpdateInventory();
                     Destroy(gameObject);
                     break;

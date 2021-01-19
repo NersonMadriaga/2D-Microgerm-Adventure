@@ -9,6 +9,22 @@ public class MenuScene : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
+
+    public void Setting(GameObject canvas)
+    {
+        canvas.SetActive(true);
+    }
+
+    public void ClosedOptions(GameObject canvas)
+    {
+        canvas.SetActive(false);
+    }
+
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
 
 // GUI screenshots

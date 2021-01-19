@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73e391429c0f4d4bb8f068f956d9f95, type: 3}
+  m_Name: item2.6
+  m_EditorClassIdentifier: 
+  hint: 'Saprophytes are organisms that can''t make their own food. In order to survive,
+    they feed on dead and decaying matter '
+  level: 2
+  prefab: {fileID: 4427265433349833024, guid: 12e3d577d72826c41b3aff440d3c3c15, type: 3}
+  question: What are fungi called because they live on dead or decaying organic material?
+  isBoolean: 0
+  isTrue: 0
+  correctAnswer: Saprophyte
+  choices:
+  - Saprophyte
+  - Mutualist
+  - Autotroph
+  - Parasite

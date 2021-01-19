@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73e391429c0f4d4bb8f068f956d9f95, type: 3}
+  m_Name: item1.2
+  m_EditorClassIdentifier: 
+  hint: Latent viruses are present in cell as Proviruses
+  level: 1
+  prefab: {fileID: 4427265433349833024, guid: d11fb6817299f9f49851e564f4e0c2f7, type: 3}
+  question: 'Latent viruses are present in cell as:'
+  isBoolean: 0
+  isTrue: 0
+  correctAnswer: Proviruses
+  choices:
+  - Enzymes
+  - Proviruses
+  - Capsids
+  - Prophages

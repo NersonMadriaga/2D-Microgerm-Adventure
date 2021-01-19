@@ -7,11 +7,9 @@ public class LearningManager : MonoBehaviour
 {
     public static LearningManager Instance { get; private set; }
 
-    public GameObject learningOneCanvas, learningTwoCanvas, learningThreeCanvas, inventoryCanvas;
+    public GameObject learningCanvas;
 
-    [SerializeField] private TextMeshProUGUI hint;
-
-    public ItemSO item;
+    [SerializeField] private GameObject hint;
 
     private void Awake()
     {
@@ -24,63 +22,36 @@ public class LearningManager : MonoBehaviour
         InitialGraphics();
     }
 
+    private void DisplayHint(string text)
+    {
+        hint.GetComponent<TextMeshProUGUI>().text = text;
+    }
+
     private void FindCanvas()
     {
-        learningOneCanvas = GameObject.Find("LearningOneCanvas");
-        learningTwoCanvas = GameObject.Find("LearningTwoCanvas");
-        learningThreeCanvas = GameObject.Find("LearningThreeCanvas");
-        inventoryCanvas = GameObject.Find("InventoryCanvas");
+        learningCanvas = GameObject.Find("LearningCanvas");
+        hint = GameObject.Find("HintText");
+        
+        
     }
 
     private void InitialGraphics()
     {
-        learningOneCanvas.gameObject.SetActive(false);
-        learningTwoCanvas.SetActive(false);
-        learningThreeCanvas.SetActive(false);
-        //inventoryCanvas.SetActive(false);
+        learningCanvas.gameObject.SetActive(false);
     }
 
-    public void OpenLearningPhase()
+    public void OpenLearningPhase(string text)
     {
-        switch (GameManager.Instance.CurrentLevel)
-        {
-            default:
-            case 1:
-                OpenLearningOneCanvas();
-                break;
-            case 2:
-                OpenLearningTwoCanvas();
-                break;
-            case 3:
-                OpenLearningThreeCanvas();
-                break;
-            
-        }
+        learningCanvas.gameObject.SetActive(true);
+        DisplayHint(text);
+        GameManager.Instance.OnClickInventoryButton();
 
-        inventoryCanvas.SetActive(false);
     }
 
-    public void OpenLearningOneCanvas()
-    {
-        GameManager.Instance.ClosedGameCanvas();
-        learningOneCanvas.SetActive(true);
-    }
-
-    public void ClosedLearning()
+    public void ClosedLearningCanvas()
     {
         InitialGraphics();
         GameManager.Instance.OpenInventory();
-    }
-
-    public void OpenLearningTwoCanvas()
-    {
-        GameManager.Instance.ClosedGameCanvas();
-        learningTwoCanvas.SetActive(true);
-    }
-
-    public void OpenLearningThreeCanvas()
-    {
-        GameManager.Instance.ClosedGameCanvas();
     }
 
 }

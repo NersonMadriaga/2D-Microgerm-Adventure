@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73e391429c0f4d4bb8f068f956d9f95, type: 3}
+  m_Name: item2.2
+  m_EditorClassIdentifier: 
+  hint: Fungal Enzyme absorbs nutrients from its environment through its mycelium
+    in a two-stage process.
+  level: 2
+  prefab: {fileID: 4427265433349833024, guid: 1bc91a3099993db44ba1e4fd3f987724, type: 3}
+  question: When a mycelium infiltrates an unexploited source of dead organic matter,
+    what are most likely to appear within the food source soon thereafter?
+  isBoolean: 0
+  isTrue: 0
+  correctAnswer: Fungal enzymes
+  choices:
+  - Fungal enzymes
+  - Soredia
+  - Fungal haustoria
+  - Increased oxygen levels

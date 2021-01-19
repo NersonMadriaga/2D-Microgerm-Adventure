@@ -10,5 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e73e391429c0f4d4bb8f068f956d9f95, type: 3}
-  m_Name: Hint1
+  m_Name: item1.9
   m_EditorClassIdentifier: 
+  hint: Viruses are cause of chicken pox, flu, and colds
+  level: 1
+  prefab: {fileID: 4427265433349833024, guid: aa4b50e6d39490b4abe8f682b777a8cc, type: 3}
+  question: Some Example of viruses are chicken pox, flu, and colds
+  isBoolean: 1
+  isTrue: 1
+  correctAnswer: 
+  choices: []

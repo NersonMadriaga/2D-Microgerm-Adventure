@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4490225012278756036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3960583568330403958}
+  m_Layer: 8
+  m_Name: DropPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3960583568330403958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4490225012278756036}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0919, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8429292324344809456}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8429292322545231646
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +342,7 @@ RectTransform:
   m_Children:
   - {fileID: 8429292322948226491}
   m_Father: {fileID: 8429292324344809456}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -403,11 +433,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8429292323941409773}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0932, y: -0.0427, z: 0}
+  m_LocalPosition: {x: -0.0932, y: -0.0575, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8429292324344809456}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8429292324344809449
 GameObject:
@@ -423,12 +453,11 @@ GameObject:
   - component: {fileID: 8429292324344809459}
   - component: {fileID: 8429292324344809452}
   - component: {fileID: 8429292324344809453}
-  - component: {fileID: 8429292324344809454}
   - component: {fileID: 8429292324344809455}
   - component: {fileID: 8429292324344809448}
   m_Layer: 8
-  m_Name: Slime_2 (1)
-  m_TagString: Untagged
+  m_Name: BrownSlime
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -444,6 +473,7 @@ Transform:
   m_LocalPosition: {x: 68.27, y: -1.34, z: 0}
   m_LocalScale: {x: -15, y: 15, z: 1}
   m_Children:
+  - {fileID: 3960583568330403958}
   - {fileID: 8429292324003542750}
   - {fileID: 8429292324625517461}
   - {fileID: 8429292323685756698}
@@ -579,37 +609,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.02}
+  m_Offset: {x: 0, y: -0.01}
   serializedVersion: 2
   m_Radius: 0.06
---- !u!114 &8429292324344809454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8429292324344809449}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 728cc767d4631254c8a25da4144b2ac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPatrol: 0
-  walkSpeed: 200
-  isTurn: 0
-  distance: 1.5
-  attackRange: 0.5
-  rb: {fileID: 0}
-  groundCheckPos: {fileID: 8429292324003542750}
-  target: {fileID: 8429292324625517461}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 1280
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 512
-  attackPoint: {fileID: 0}
-  damage: 5
 --- !u!114 &8429292324344809455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,9 +624,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4ed4f12332cf243a8edd841f482a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 0
   dev: 0
-  maxHealth: 100
+  maxHealth: 150
   healthBar: {fileID: 8429292322948226484}
+  loot: {fileID: 4427265433349833024, guid: cd0b49e59892b8244b9982cda6fcb102, type: 3}
+  dropPoint: {fileID: 3960583568330403958}
+  itemIndex: 0
 --- !u!114 &8429292324344809448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,11 +647,12 @@ MonoBehaviour:
   distance: 0.8
   attackRange: 0.4
   timeToMove: 0
+  damage: 15
   groundCheck: {fileID: 8429292324003542750}
   targetCheck: {fileID: 8429292324625517461}
   terrain:
     serializedVersion: 2
-    m_Bits: 3072
+    m_Bits: 3328
   playerMask:
     serializedVersion: 2
     m_Bits: 512
@@ -677,5 +684,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8429292324344809456}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

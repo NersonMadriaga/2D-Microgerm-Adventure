@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Item")]
+[CreateAssetMenu(fileName = "New Item", menuName = "ScriptableObjects/Item")]
 public class ItemSO : ScriptableObject
 {
     [TextArea(3,5)]
-    public string text;
-
+    public string hint;
+    public int level;
+    public GameObject prefab;
+    [TextArea(3,5)]
     public string question;
+    public bool isBoolean;
+    public bool isTrue;
     public string correctAnswer;
     public string[] choices;
 
-    public void ShuffleChoices()
+    public string[] ShuffleChoices()
     {
-        choices = Shuffle(choices);
+        return Shuffle(choices);
+
     }
 
     private string[] Shuffle(string[] choices)

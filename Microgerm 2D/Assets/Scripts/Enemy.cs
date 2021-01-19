@@ -10,14 +10,20 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Health healthBar;
     [SerializeField] private GameObject loot;
     [SerializeField] private Transform dropPoint;
-
+    [SerializeField] private int itemIndex;
 
     private bool isDead;
     private bool isAlreadyDropItem;
     private int currentHealth;
     private Animator anim;
 
- 
+    public int ItemIndex
+    {
+        get
+        {
+            return itemIndex;
+        }
+    }
 
     public bool IsDead
     {
@@ -91,6 +97,8 @@ public class Enemy : MonoBehaviour
     private void DropItem()
     {
         Instantiate(loot, dropPoint.position, Quaternion.identity);
+        //loot.transform.position = new Vector3(dropPoint.position.x,dropPoint.position.y,dropPoint.position.z);
+        //loot.transform.rotation = Quaternion.identity;
     }
 
     public void TakeDamage(int damage)

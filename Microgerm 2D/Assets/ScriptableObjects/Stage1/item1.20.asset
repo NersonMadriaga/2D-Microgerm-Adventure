@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73e391429c0f4d4bb8f068f956d9f95, type: 3}
+  m_Name: item1.20
+  m_EditorClassIdentifier: 
+  hint: Viruses are obligate intracellular parasites so they depend on host for their
+    survival. They cannot be grown in non-living culture media or on Blood agar plates
+    alone, they must require living cells to support their replication
+  level: 1
+  prefab: {fileID: 4427265433349833024, guid: 3525b066e367eb548bcffd44c1ae1dff, type: 3}
+  question: Viruses cannot be cultivated in/or?
+  isBoolean: 0
+  isTrue: 0
+  correctAnswer: Blood agar
+  choices:
+  - Blood agar
+  - Tissue culture
+  - Bird embryos
+  - Live mammals

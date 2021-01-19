@@ -71,7 +71,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1337168718973134893}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1ccaa69aa476f494f95924cca1458d4b, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -97,7 +97,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1337168718973134893}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1ccaa69aa476f494f95924cca1458d4b, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -338,8 +338,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2743ccedfffe6b0459e05f4142ce3934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dev: 1
-  moveSpeed: 5
+  dev: 0
+  moveSpeed: 7
   jumpForce: 500
   groundCheck: {fileID: 4617354960598427728}
   groundLayer:
@@ -363,7 +363,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   attackPoint: {fileID: 5032775633235670142}
-  damage: 0
+  damage: 20
 --- !u!114 &7063696418945539251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,7 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a439c2011c4f44786f4b12229f312a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dev: 1
+  dev: 0
   maxHealth: 100
   healthBar: {fileID: 4617354959694360169}
   currentHealth: 0
@@ -461,9 +461,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748e8da852198964f9601adcd3092edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFull: 00
+  isFull: 000000000000000000000000000000000000000000000000000000000000
   slots:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  itemImage: {fileID: -2296136784575702335, guid: 1d12583465571aa4c9a07706ae2ffa4e,
+    type: 3}
 --- !u!1001 &5183035131448731809
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class HintDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text.text = hint.text;
+        text.text = hint.hint;
     }
 
 }

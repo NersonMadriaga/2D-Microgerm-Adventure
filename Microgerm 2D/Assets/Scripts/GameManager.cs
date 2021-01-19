@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     private GameObject pauseCanvas, optionsCanvas, gameCanvas,
         gameOverCanvas, inventoryCanvas, player, questionAnswerCanvas, confirmationCanvas;
 
-    private bool isGameOver;
+    private bool isGameOver, isQuiz;
 
     public bool IsGameOver { set { isGameOver = value; } }
     public int CurrentLevel { get { return currentLevel;  } set { currentLevel = value; } }
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         isGameOver = false;
-
+        isQuiz = false;
         
     }
     private void Start()
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("current leve " + currentLevel);
+
     }
 
     private void InitialPlayerPosition()
@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         {
             case 1:
                 player.transform.position = new Vector2(-15f, 1.7f);
+                //player.transform.position = new Vector2(137f, 1.7f);
                 break;
             case 2:
                 player.transform.position = new Vector2(-15f, -50f);
@@ -129,9 +130,11 @@ public class GameManager : MonoBehaviour
     public void IncreaseLevel()
     {
         currentLevel++;
-        LevelManager.Instance.Level = currentLevel;
-        InitialPlayerPosition();
-        BackgroundManager.Instance.ChangeBackground(currentLevel);
+        //LevelManager.Instance.Level = currentLevel;
+        //InitialPlayerPosition();
+        //BackgroundManager.Instance.ChangeBackground(currentLevel);
+
+        Restart();
     }
 
     public void PlayAgain()
@@ -163,6 +166,17 @@ public class GameManager : MonoBehaviour
         gameCanvas.gameObject.SetActive(false);
         Time.timeScale = 0f;
     }
+    public void ClosedInventory()
+    {
+        inventoryCanvas.gameObject.SetActive(false);
+        gameCanvas.gameObject.SetActive(true);
+        Time.timeScale = 1f;
+    }
+
+    public void OnClickInventoryButton()
+    {
+        inventoryCanvas.gameObject.SetActive(false);
+    }
 
     public void ClosedGameCanvas()
     {
@@ -174,12 +188,6 @@ public class GameManager : MonoBehaviour
         gameCanvas.SetActive(true);
     }
 
-    public void ClosedInventory()
-    {
-        inventoryCanvas.gameObject.SetActive(false);
-        gameCanvas.gameObject.SetActive(true);
-        Time.timeScale = 1f;
-    }
 
     public void ClosedOptions()
     {
@@ -218,6 +226,11 @@ public class GameManager : MonoBehaviour
         // close confirmation 
         // open question answer canvas
         // start the quiz
+        isQuiz = true;
+        InitialGraphics();
+        gameCanvas.SetActive(false);
+        questionAnswerCanvas.SetActive(true);
+        QuizManager.instance.DisplayInterface();
     }
 
     public void NoQuiz()
@@ -226,6 +239,11 @@ public class GameManager : MonoBehaviour
         // back to the game
         ClosedConfirmation();
 
+    }
+
+    public void ClosedQuestionAnswerCanvas()
+    {
+        questionAnswerCanvas.SetActive(false);
     }
 
     public void ClosedConfirmation()
