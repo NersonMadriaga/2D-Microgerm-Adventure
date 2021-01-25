@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager instance { get; private set; }
+    public static ScoreManager Instance { get; private set; }
 
     [SerializeField] private GameObject passedCanvas, failedCanvas;
 
@@ -24,29 +24,33 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
-        score = 0;
+        Instance = this;
+        
     }
 
     private void Start()
     {
         passedCanvas = GameObject.Find("PassedCanvas");
         failedCanvas = GameObject.Find("FailedCanvas");
-
+        score = 0;
         DefaultGraphics();
     }
 
-    private void DefaultGraphics()
+    public void DefaultGraphics()
     {
         passedCanvas.gameObject.SetActive(false);
         failedCanvas.gameObject.SetActive(false);
+    }
+
+    public void ResetScore()
+    {
+        score = 0;
     }
 
     private int GetPassingScore()
     {
         switch (GameManager.Instance.CurrentLevel)
         {
-            default:
             case 1:
                 passingScore = passingScore1;
                 break;
@@ -56,14 +60,15 @@ public class ScoreManager : MonoBehaviour
             case 3:
                 passingScore = passingScore3;
                 break;
+            default:
+                break;
         }
-
         return passingScore;
     }
 
     public void CheckScore()
     {
-        if(score > GetPassingScore())
+        if(score >= GetPassingScore())
         {
             passedCanvas.gameObject.SetActive(true);
             failedCanvas.gameObject.SetActive(false);
@@ -71,6 +76,7 @@ public class ScoreManager : MonoBehaviour
             passedCanvas.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Score : " + score;
         } else
         {
+           failedCanvas.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Score : " + score;
            failedCanvas.gameObject.SetActive(true);
            passedCanvas.gameObject.SetActive(false);
         }

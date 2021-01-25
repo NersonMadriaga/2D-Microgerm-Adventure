@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-   public static ItemManager instance { get; private set; }
+   public static ItemManager Instance { get; private set; }
 
     private ItemListSO itemList;
     private ItemSO item;
@@ -25,13 +25,14 @@ public class ItemManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
         index = 0;
     }
 
     private void Start()
     {
         itemList = Resources.Load<ItemListSO>(typeof(ItemListSO).Name);
+
     }
 
     public ItemSO GetItemDrop()

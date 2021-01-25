@@ -144,7 +144,14 @@ public class EnemyMovement : MonoBehaviour
 
     private void DirectionCheck()
     {
-        isMovingRight = movementSpeed > 0f ? true : false;
+        if(movementSpeed > 0f)
+        {
+            isMovingRight = true;
+        } else
+        {
+            isMovingRight = false;
+        }
+
         direction = isMovingRight ? Vector2.right : Vector2.left;
     }
     private void Flip()

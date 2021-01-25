@@ -8,63 +8,53 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     static public int currentLevel;
+    private int quizRetake;
+    [SerializeField] private GameObject pauseCanvas, optionsCanvas, gameCanvas,
+        gameOverCanvas, inventoryCanvas, player, questionAnswerCanvas, confirmationCanvas, scrollCanvas;
 
-    private GameObject pauseCanvas, optionsCanvas, gameCanvas,
-        gameOverCanvas, inventoryCanvas, player, questionAnswerCanvas, confirmationCanvas;
-
-    private bool isGameOver, isQuiz;
-
-    public bool IsGameOver { set { isGameOver = value; } }
     public int CurrentLevel { get { return currentLevel;  } set { currentLevel = value; } }
 
-
+    [SerializeField] private TextMeshProUGUI stageText;
 
     private void Awake()
     {
         Instance = this;
-
-        isGameOver = false;
-        isQuiz = false;
-        
+        currentLevel = 1;
+        quizRetake = 0;
     }
     private void Start()
     {
         Load();
-        
+        Debug.Log("current level" + currentLevel);
         BackgroundManager.Instance.ChangeBackground(currentLevel);
 
         InitialProperties();
         InitialPlayerPosition();
         InitialGraphics();
         InitialHealth();
-        PlayerPrefs.DeleteAll();
-    }
-
-    private void Update()
-    {
-
+        
     }
 
     private void InitialPlayerPosition()
     {
 
-        Debug.Log("CurrentLevelInitialPlayer " + currentLevel);
         player.SetActive(true);
         switch (currentLevel)
         {
             case 1:
                 player.transform.position = new Vector2(-15f, 1.7f);
                 //player.transform.position = new Vector2(137f, 1.7f);
+                stageText.text = "STAGE : 1";
                 break;
             case 2:
                 player.transform.position = new Vector2(-15f, -50f);
+                stageText.text = "STAGE : 2";
                 break;
             case 3:
                 player.transform.position = new Vector2(-15f, -110f);
+                stageText.text = "STAGE : 3";
                 break;
         }
-
-
     }
 
     private void InitialProperties()
@@ -77,17 +67,19 @@ public class GameManager : MonoBehaviour
         inventoryCanvas = GameObject.Find("InventoryCanvas");
         confirmationCanvas = GameObject.Find("ConfirmationCanvas");
         questionAnswerCanvas = GameObject.Find("QuestionAnswerCanvas");
+        scrollCanvas = GameObject.Find("ScrollCanvas");
     }
 
     private void InitialGraphics()
     {
         pauseCanvas.SetActive(false);
         optionsCanvas.SetActive(false);
-        gameCanvas.SetActive(true);
+        gameCanvas.SetActive(false);
         gameOverCanvas.SetActive(false);
         inventoryCanvas.SetActive(false);
         confirmationCanvas.SetActive(false);
         questionAnswerCanvas.SetActive(false);
+        scrollCanvas.SetActive(false);
     }
 
     private void InitialHealth()
@@ -109,15 +101,30 @@ public class GameManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("Level"))
         {
+            if(PlayerPrefs.GetInt("Level") >0 && PlayerPrefs.GetInt("Level") <= 3)
+            {
+                currentLevel = PlayerPrefs.GetInt("Level");
+            } else
+            {
+                currentLevel = 1;
+            }
             
-            currentLevel = PlayerPrefs.GetInt("Level");
-            Debug.Log("Loaded CurrentLevel " + currentLevel);
 
         } else
         {
-            currentLevel = 1;
+            currentLevel = 3;
         }
         
+    }
+
+    public void GetAllScrolls()
+    {
+        scrollCanvas.SetActive(true);
+    }
+
+    public void HideAllScrolls()
+    {
+        scrollCanvas.SetActive(false);
     }
 
     public void GameOver()
@@ -129,13 +136,23 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseLevel()
     {
-        currentLevel++;
+        FindObjectOfType<AudioManager>().Play("PauseSFX");
+        if (currentLevel>0 && currentLevel < 3)
+        {
+            currentLevel++;
+            Restart();
+        }
+        else
+        {
+            GameOver();
+        }
+    }
+        
         //LevelManager.Instance.Level = currentLevel;
         //InitialPlayerPosition();
         //BackgroundManager.Instance.ChangeBackground(currentLevel);
 
-        Restart();
-    }
+        
 
     public void PlayAgain()
     {
@@ -146,11 +163,12 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         pauseCanvas.SetActive(true);
+        FindObjectOfType<AudioManager>().Play("PauseSFX");
         Time.timeScale = 0f;
     }
     public void OpenOptions()
     {
-        
+        FindObjectOfType<AudioManager>().Play("PauseSFX");
         optionsCanvas.gameObject.SetActive(true);
     }
 
@@ -162,12 +180,14 @@ public class GameManager : MonoBehaviour
 
     public void OpenInventory()
     {
+        FindObjectOfType<AudioManager>().Play("PauseSFX");
         inventoryCanvas.gameObject.SetActive(true);
         gameCanvas.gameObject.SetActive(false);
         Time.timeScale = 0f;
     }
     public void ClosedInventory()
     {
+        FindObjectOfType<AudioManager>().Play("Unpause");
         inventoryCanvas.gameObject.SetActive(false);
         gameCanvas.gameObject.SetActive(true);
         Time.timeScale = 1f;
@@ -185,6 +205,7 @@ public class GameManager : MonoBehaviour
 
     public void OpenGameCanvas()
     {
+        FindObjectOfType<AudioManager>().Play("PauseSFX");
         gameCanvas.SetActive(true);
     }
 
@@ -193,10 +214,12 @@ public class GameManager : MonoBehaviour
     {
         
         optionsCanvas.gameObject.SetActive(false);
+        FindObjectOfType<AudioManager>().Play("Unpause");
     }
 
     public void ResumeGame()
     {
+        FindObjectOfType<AudioManager>().Play("Unpause");
         pauseCanvas.gameObject.SetActive(false);
         Time.timeScale = 1f;
     }
@@ -215,8 +238,14 @@ public class GameManager : MonoBehaviour
         if (txt.text.Equals("BGM ON"))
         {
             txt.text = "BGM OFF";
+            //AudioListener.pause = false;
+            //AudioManager.Instance.BackgroundMusicOn();
+            FindObjectOfType<AudioManager>().BackgroundMusicOff();
         } else
         {
+            //AudioManager.Instance.BackgroundMusicOn();
+            FindObjectOfType<AudioManager>().BackgroundMusicOn();
+            //AudioListener.pause = false;
             txt.text = "BGM ON";
         }
     }
@@ -226,11 +255,10 @@ public class GameManager : MonoBehaviour
         // close confirmation 
         // open question answer canvas
         // start the quiz
-        isQuiz = true;
         InitialGraphics();
         gameCanvas.SetActive(false);
         questionAnswerCanvas.SetActive(true);
-        QuizManager.instance.DisplayInterface();
+        QuizManager.Instance.DisplayInterface();
     }
 
     public void NoQuiz()
@@ -244,6 +272,27 @@ public class GameManager : MonoBehaviour
     public void ClosedQuestionAnswerCanvas()
     {
         questionAnswerCanvas.SetActive(false);
+    }
+
+    public void RestartQuiz()
+    {
+        
+        Debug.Log(quizRetake + " QuizRetakeCount");
+       if(quizRetake < 3)
+        {
+            questionAnswerCanvas.SetActive(false);
+            ScoreManager.Instance.DefaultGraphics();
+            ScoreManager.Instance.ResetScore();
+            QuizManager.Instance.RestartQuiz();
+            gameCanvas.SetActive(true);
+            Time.timeScale = 1f;
+           
+        } else
+        {
+            gameObject.GetComponent<FailedQuiz>().HideRetakeQuizButton();
+        }
+
+        quizRetake++;
     }
 
     public void ClosedConfirmation()
@@ -267,10 +316,13 @@ public class GameManager : MonoBehaviour
         if (txt.text.Equals("SFX ON"))
         {
             txt.text = "SFX OFF";
+            FindObjectOfType<AudioManager>().SoundEffectOn();
         }
         else
         {
             txt.text = "SFX ON";
+            
+            FindObjectOfType<AudioManager>().SoundEffectMute();
         }
     }
 }

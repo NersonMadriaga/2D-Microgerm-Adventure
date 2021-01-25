@@ -9,6 +9,8 @@ public class QuizButton : MonoBehaviour
     private string choice, correctAnswer, isTrueText;
     private bool isTrue, isBoolean;
 
+    private bool isAnswered;
+
     public string IsTrueText
     {
         get
@@ -61,6 +63,11 @@ public class QuizButton : MonoBehaviour
             correctAnswer = value;
         }
     }
+
+    private void Awake()
+    {
+        isAnswered = false;
+    }
     private void Start()
     {
         DefaultGraphics();
@@ -73,6 +80,8 @@ public class QuizButton : MonoBehaviour
     }
     public void OnAnswered()
     {
+       
+        
         if(gameObject.GetComponent<Image>().sprite != correct)
         {
             if (isBoolean)
@@ -80,34 +89,45 @@ public class QuizButton : MonoBehaviour
                 if ((isTrueText.Equals("True") && isTrue) || (isTrueText.Equals("False") && isTrue == false))
                 {
                     CorrectAnswered();
-                    ScoreManager.instance.Score += 1;
+                    if (isAnswered == false)
+                    {
+                        ScoreManager.Instance.Score += 1;
+                    }
+
+                    FindObjectOfType<AudioManager>().Play("CorrectAnswer");
                 } else
                 {
                     IncorrectAnswered();
+                    FindObjectOfType<AudioManager>().Play("IncorrectAnswer");
                 }
             } else
             {
                 if (choice.Equals(correctAnswer))
                 {
                     CorrectAnswered();
-                    ScoreManager.instance.Score += 1;
+                    if (isAnswered == false)
+                    {
+                        ScoreManager.Instance.Score += 1;
+                    }
+                    FindObjectOfType<AudioManager>().Play("CorrectAnswer");
                 }
                 else
                 {
                     IncorrectAnswered();
+                    FindObjectOfType<AudioManager>().Play("IncorrectAnswer");
                 }
             }
         }
         else
         {
-            QuizManager.instance.NextQuestion();
+            QuizManager.Instance.NextQuestion();
         }
 
-      
+
 
         //DisableButton();
-
-        QuizManager.instance.OnAnswered();
+        isAnswered = true;
+        QuizManager.Instance.OnAnswered();
     }
 
     private void CorrectAnswered()
@@ -122,7 +142,7 @@ public class QuizButton : MonoBehaviour
         Debug.Log("Incorrect Answer");
         gameObject.GetComponent<Image>().sprite = incorrect;
 
-        QuizManager.instance.RevealCorrectAnswer();
+        QuizManager.Instance.RevealCorrectAnswer();
     }
 
     public void RevealCorrectAnswer()

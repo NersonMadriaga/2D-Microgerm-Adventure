@@ -6,7 +6,7 @@ public class PlayerAttack : MonoBehaviour
 {
     private Animator anim;
     private float timeSinceAttack = 0f;
-    private float attackTime = 0.5f;
+    private float attackTime;
     private int currentAttack = 0;
     private bool attackMode = false;
 
@@ -33,6 +33,7 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        attackTime = 0.5f;
     }
 
     // Update is called once per frame
@@ -66,10 +67,10 @@ public class PlayerAttack : MonoBehaviour
         }
         // play attack animation
         anim.SetTrigger("Attack_"+currentAttack);
+        FindObjectOfType<AudioManager>().Play("Attack");
 
-        
 
-            timeSinceAttack = 0.0f;
+        timeSinceAttack = 0.0f;
         // detect enemies in rangw of attack
         
         Collider2D[] hitenemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);

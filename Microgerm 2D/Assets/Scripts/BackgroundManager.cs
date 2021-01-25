@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BackgroundManager : MonoBehaviour
 {
-    private GameObject background1;
-    private GameObject background2;
-    private GameObject background3;
+    
     public static BackgroundManager Instance { get; private set; }
+
+    [SerializeField] private GameObject background1, background2, background3;
 
     private void Awake()
     {
@@ -20,14 +20,9 @@ public class BackgroundManager : MonoBehaviour
         DefaultSetting();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void ChangeBackground(int level)
     {
+        Debug.Log("Change background");
         DefaultSetting();
 
         switch (level)
@@ -40,6 +35,8 @@ public class BackgroundManager : MonoBehaviour
                 break;
             case 3:
                 background3.SetActive(true);
+                break;
+            default:
                 break;
         }
     }

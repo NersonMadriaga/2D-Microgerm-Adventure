@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73e391429c0f4d4bb8f068f956d9f95, type: 3}
+  m_Name: item3.18
+  m_EditorClassIdentifier: 
+  hint: The abnormally folded proteins in the brain bind together and make holes
+    in the brain.
+  level: 3
+  prefab: {fileID: 4427265433349833024, guid: e935bcaf1a402af478bee5c010dadbb1, type: 3}
+  question: The abnormally folded proteins in the brain bind together and make_____
+    in the brain.
+  isBoolean: 0
+  isTrue: 0
+  correctAnswer: Holes
+  choices:
+  - Holes
+  - Cows
+  - Parties
+  - Eggs

@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private bool isBoss;
-    [SerializeField] private bool dev = false;
     [SerializeField] private int maxHealth;
     [SerializeField] private Health healthBar;
-    [SerializeField] private GameObject loot;
     [SerializeField] private Transform dropPoint;
     [SerializeField] private int itemIndex;
+    [SerializeField] private List<GameObject> loots;
+
 
     private bool isDead;
     private bool isAlreadyDropItem;
@@ -36,6 +37,7 @@ public class Enemy : MonoBehaviour
         
         isDead = false;
         isAlreadyDropItem = false;
+       
 
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
@@ -46,6 +48,7 @@ public class Enemy : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            FindObjectOfType<AudioManager>().Play("EnemyDie");
             GameManager.Instance.RegenHealth();
             isDead = true;
            
@@ -56,7 +59,7 @@ public class Enemy : MonoBehaviour
 
             if (isBoss)
             {
-                GameManager.Instance.OpenConfirmation();
+                //GameManager.Instance.OpenConfirmation();
                 //GameManager.Instance.IncreaseLevel();
             }
 
@@ -79,7 +82,10 @@ public class Enemy : MonoBehaviour
     {
         if (isAlreadyDropItem == false)
         {
-            DropItem();
+            
+                DropItem();
+            
+            
             isAlreadyDropItem = true;
         }
         
@@ -94,15 +100,36 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+
+
     private void DropItem()
     {
-        Instantiate(loot, dropPoint.position, Quaternion.identity);
+        if (isBoss)
+        {
+            Instantiate(loots[0], dropPoint.position, Quaternion.identity);
+        } else
+        {
+            Debug.Log("drop item from mini brown slimes");
+
+            Instantiate(GetDrop(), dropPoint.position, Quaternion.identity);
+        }
+        
         //loot.transform.position = new Vector3(dropPoint.position.x,dropPoint.position.y,dropPoint.position.z);
         //loot.transform.rotation = Quaternion.identity;
     }
 
+    
+    private GameObject GetDrop()
+    {
+        System.Random rand = new System.Random();
+        int index = rand.Next(0,loots.Count);
+
+        return loots[index];
+    }
+
     public void TakeDamage(int damage)
     {
+        FindObjectOfType<AudioManager>().Play("Hit");
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
 

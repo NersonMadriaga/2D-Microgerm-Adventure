@@ -6,9 +6,9 @@ using UnityEngine.UI;
 using System;
 public class QuizManager : MonoBehaviour
 {
-    public static QuizManager instance { get; private set; }
+    public static QuizManager Instance { get; private set; }
 
-    [SerializeField] private Inventory inventory;
+    //[SerializeField] private Inventory inventory;
 
     [SerializeField] private int questionLimit1, questionLimit2, questionLimit3;
 
@@ -18,20 +18,22 @@ public class QuizManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI multipleChoiceQuestion, trueFalseQuestion;
 
+    private Inventory inventory;
+
     private List<ItemSO> _item;
 
     private string question, correctAnswer;
     private string[] choices;
     private bool isBoolean, isTrue;
-    private int index, questionLevel;
-
+    private int index;
+    private int limit;
     private ItemSO currentItem;
     private Transform[] buttonChoices;
     private Transform[] buttonTrueFalse;
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
         index = 0;
 
         _item = new List<ItemSO>();
@@ -114,11 +116,13 @@ public class QuizManager : MonoBehaviour
 
     }
 
+    public void RestartQuiz() => index = 0;
+
     public void NextQuestion()
     {
         Debug.Log("Next Question");
 
-        if (index < GetLimit())
+        if (index < GetLimit()-1)
         {
             index++;
             Debug.Log(index + "Quiz Index");
@@ -127,18 +131,16 @@ public class QuizManager : MonoBehaviour
 
         } else
         {
-            ScoreManager.instance.CheckScore();
+            ScoreManager.Instance.CheckScore();
             GameManager.Instance.ClosedQuestionAnswerCanvas();
         }
     }
 
-    private int GetLimit()
+    public int GetLimit()
     {
-        int limit = 0;
-
+        
         switch (GameManager.Instance.CurrentLevel)
         {
-            default:
             case 1:
                 limit = questionLimit1;
                 break;
@@ -147,6 +149,8 @@ public class QuizManager : MonoBehaviour
                 break;
             case 3:
                 limit = questionLimit3;
+                break;
+            default:
                 break;
         }
 
@@ -176,8 +180,6 @@ public class QuizManager : MonoBehaviour
                 }
             }
         }
-
-
 
 
     }
@@ -265,38 +267,15 @@ public class QuizManager : MonoBehaviour
     
     private void GetItem()
     {
-        /*
-        if(inventory.slots[index].transform.childCount > 0)
+        if (inventory.slots[index].transform.childCount > 0)
         {
-          if(inventory.slots[index].transform.GetChild(0).GetComponent<Item>().ItemGameObject.level != GameManager.Instance.CurrentLevel)
-            {
-                NextQuestion();
-            } else
-            {
+                
                 currentItem = inventory.slots[index].transform.GetChild(0).GetComponent<Item>().ItemGameObject;
-            }
-           
-        } else
-        {
-            currentItem = Resources.Load<ItemListSO>(typeof(ItemListSO).Name).list[index];
         }
-        */
 
-        /*
-        if(Resources.Load<ItemListSO>(typeof(ItemListSO).Name).list[index].level != GameManager.Instance.CurrentLevel)
-        {
-            index++;
-        }else
-        {
-            currentItem = Resources.Load<ItemListSO>(typeof(ItemListSO).Name).list[index];
-        }
-        */
-        FilterQuestionByLevel(GameManager.Instance.CurrentLevel);
-
-        currentItem = _item[index];
         Debug.Log("CurrentItem " + currentItem);
     }
-    private void DefaultGraphics()
+    public void DefaultGraphics()
     {
         trueFalsePanel.SetActive(false);
         multipleChoicePanel.SetActive(false);
@@ -304,20 +283,10 @@ public class QuizManager : MonoBehaviour
 
     private void FindGameObjects()
     {
-        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        inventory = GameObject.Find("Player").GetComponent<Inventory>();
         //trueFalsePanel = GameObject.Find("TrueFalsePanel");
         //multipleChoicePanel = GameObject.Find("MultipleChoicePanel");
 
        
-    }
-
-    IEnumerator EnableButton()
-    {
-        yield return new WaitForSeconds(1);
-
-        foreach (Transform btn in buttonChoices)
-        {
-            btn.GetComponent<QuizButton>().EnabledButton();
-        }
     }
 }

@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4882499387558021050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3849761680859430177}
+  - component: {fileID: 4819626503095130037}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3849761680859430177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882499387558021050}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4819626503095130037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882499387558021050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b3423f361d11d540a69d80ae5ed8b98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: EnemyDie
+    isSfx: 1
+    isBgm: 0
+    clip: {fileID: 8300000, guid: d5a05e7482d921c4c894579c5bb2e33b, type: 3}
+    volume: 0.5
+    pitch: 1.5
+    source: {fileID: 0}
+    loop: 0
+  - name: ButtonClick
+    isSfx: 1
+    isBgm: 0
+    clip: {fileID: 8300000, guid: 3a1572f5ed48c5f48aaf690d90d1bde4, type: 3}
+    volume: 0.5
+    pitch: 2
+    source: {fileID: 0}
+    loop: 0
+  - name: Hit
+    isSfx: 1
+    isBgm: 0
+    clip: {fileID: 8300000, guid: 1daf209c674dd404cbce045b443f2193, type: 3}
+    volume: 1
+    pitch: 2
+    source: {fileID: 0}
+    loop: 0
+  - name: PauseSFX
+    isSfx: 1
+    isBgm: 0
+    clip: {fileID: 8300000, guid: 5add9ad5946cfae43b306daa70bbf79c, type: 3}
+    volume: 0.5
+    pitch: 2
+    source: {fileID: 0}
+    loop: 0
+  - name: Unpause
+    isSfx: 1
+    isBgm: 0
+    clip: {fileID: 8300000, guid: 405aa5b4dfc74c348a7ab5dfe0e4b41c, type: 3}
+    volume: 0.5
+    pitch: 2
+    source: {fileID: 0}
+    loop: 0
+  - name: Attack
+    isSfx: 1
+    isBgm: 0
+    clip: {fileID: 8300000, guid: 3bec681775e477e4c8c2a801ce6d8bf8, type: 3}
+    volume: 0.5
+    pitch: 3
+    source: {fileID: 0}
+    loop: 0
+  - name: MainTheme
+    isSfx: 0
+    isBgm: 1
+    clip: {fileID: 8300000, guid: 3725af5aa52dafe46ae65222afae38c3, type: 3}
+    volume: 1
+    pitch: 2
+    source: {fileID: 0}
+    loop: 1
+  - name: CorrectAnswer
+    isSfx: 1
+    isBgm: 0
+    clip: {fileID: 8300000, guid: 4bd51fe54103e114887dab183bd2bca7, type: 3}
+    volume: 1
+    pitch: 2
+    source: {fileID: 0}
+    loop: 0
+  - name: IncorrectAnswer
+    isSfx: 1
+    isBgm: 0
+    clip: {fileID: 8300000, guid: b8202cb1899f3a6409e813ab775e21c2, type: 3}
+    volume: 1
+    pitch: 2
+    source: {fileID: 0}
+    loop: 0
