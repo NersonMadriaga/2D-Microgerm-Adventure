@@ -74,6 +74,8 @@ public class ScoreManager : MonoBehaviour
             failedCanvas.gameObject.SetActive(false);
 
             passedCanvas.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Score : " + score;
+
+            GameManager.Instance.GameEndComplete();
         } else
         {
            failedCanvas.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Score : " + score;

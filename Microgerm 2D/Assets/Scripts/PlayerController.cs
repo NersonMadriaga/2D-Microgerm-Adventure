@@ -47,6 +47,10 @@ public class PlayerController : MonoBehaviour
 
         MoveCharacter();
 
+        Debug.Log(moveLeft + " move left");
+        Debug.Log(moveRight + " move right");
+
+
         if ( dev && Input.GetButtonDown("Jump") && isGrounded)
         {
             isJumping = true;

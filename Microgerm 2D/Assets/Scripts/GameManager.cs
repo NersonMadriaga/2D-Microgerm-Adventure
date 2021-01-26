@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseCanvas, optionsCanvas, gameCanvas,
         gameOverCanvas, inventoryCanvas, player, questionAnswerCanvas, confirmationCanvas, scrollCanvas;
 
+    [SerializeField] private GameObject nextLevelBtn, mainMenuBtn;
     public int CurrentLevel { get { return currentLevel;  } set { currentLevel = value; } }
 
     [SerializeField] private TextMeshProUGUI stageText;
@@ -112,7 +114,7 @@ public class GameManager : MonoBehaviour
 
         } else
         {
-            currentLevel = 3;
+            currentLevel = 1;
         }
         
     }
@@ -134,6 +136,18 @@ public class GameManager : MonoBehaviour
         gameOverCanvas.SetActive(true);
     }
 
+    public void GameEndComplete()
+    {
+        if(currentLevel == 3)
+        {
+            nextLevelBtn.SetActive(false);
+            mainMenuBtn.SetActive(true);
+        } else
+        {
+            nextLevelBtn.SetActive(true);
+            mainMenuBtn.SetActive(false);
+        }
+    }
     public void IncreaseLevel()
     {
         FindObjectOfType<AudioManager>().Play("PauseSFX");
@@ -148,12 +162,6 @@ public class GameManager : MonoBehaviour
         }
     }
         
-        //LevelManager.Instance.Level = currentLevel;
-        //InitialPlayerPosition();
-        //BackgroundManager.Instance.ChangeBackground(currentLevel);
-
-        
-
     public void PlayAgain()
     {
         InitialGraphics();
@@ -191,6 +199,10 @@ public class GameManager : MonoBehaviour
         inventoryCanvas.gameObject.SetActive(false);
         gameCanvas.gameObject.SetActive(true);
         Time.timeScale = 1f;
+
+        player.GetComponent<PlayerController>().RightMoveOnPressedUp();
+        player.GetComponent<PlayerController>().LeftMoveOnPressedUp();
+
     }
 
     public void OnClickInventoryButton()
@@ -222,6 +234,9 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("Unpause");
         pauseCanvas.gameObject.SetActive(false);
         Time.timeScale = 1f;
+
+        player.GetComponent<PlayerController>().RightMoveOnPressedUp();
+        player.GetComponent<PlayerController>().LeftMoveOnPressedUp();
     }
 
     public void Restart()
@@ -286,7 +301,10 @@ public class GameManager : MonoBehaviour
             QuizManager.Instance.RestartQuiz();
             gameCanvas.SetActive(true);
             Time.timeScale = 1f;
-           
+
+            player.GetComponent<PlayerController>().RightMoveOnPressedUp();
+            player.GetComponent<PlayerController>().LeftMoveOnPressedUp();
+
         } else
         {
             gameObject.GetComponent<FailedQuiz>().HideRetakeQuizButton();
@@ -300,6 +318,9 @@ public class GameManager : MonoBehaviour
         confirmationCanvas.gameObject.SetActive(false);
         gameCanvas.gameObject.SetActive(true);
         Time.timeScale = 1f;
+
+        player.GetComponent<PlayerController>().RightMoveOnPressedUp();
+        player.GetComponent<PlayerController>().LeftMoveOnPressedUp();
     }
 
     public void OpenConfirmation()
