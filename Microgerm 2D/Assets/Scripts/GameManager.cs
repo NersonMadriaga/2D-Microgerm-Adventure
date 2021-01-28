@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     static public int currentLevel;
     private int quizRetake;
     [SerializeField] private GameObject pauseCanvas, optionsCanvas, gameCanvas,
-        gameOverCanvas, inventoryCanvas, player, questionAnswerCanvas, confirmationCanvas, scrollCanvas;
+        gameOverCanvas, inventoryCanvas, player, questionAnswerCanvas, confirmationCanvas, scrollCanvas, gameEndCanvas;
 
     [SerializeField] private GameObject nextLevelBtn, mainMenuBtn;
     public int CurrentLevel { get { return currentLevel;  } set { currentLevel = value; } }
@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
         confirmationCanvas = GameObject.Find("ConfirmationCanvas");
         questionAnswerCanvas = GameObject.Find("QuestionAnswerCanvas");
         scrollCanvas = GameObject.Find("ScrollCanvas");
+        gameEndCanvas = GameObject.Find("GameEndCanvas");
     }
 
     private void InitialGraphics()
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
         confirmationCanvas.SetActive(false);
         questionAnswerCanvas.SetActive(false);
         scrollCanvas.SetActive(false);
+        gameEndCanvas.SetActive(false);
     }
 
     private void InitialHealth()
@@ -134,6 +136,12 @@ public class GameManager : MonoBehaviour
         InitialGraphics();
         gameCanvas.SetActive(false);
         gameOverCanvas.SetActive(true);
+    }
+
+    public void PostGame()
+    {
+        InitialGraphics();
+        gameEndCanvas.SetActive(true);
     }
 
     public void GameEndComplete()

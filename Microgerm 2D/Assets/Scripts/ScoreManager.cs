@@ -78,7 +78,8 @@ public class ScoreManager : MonoBehaviour
             GameManager.Instance.GameEndComplete();
         } else
         {
-           failedCanvas.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Score : " + score;
+            string text = "Score : " + score + "<br>Passing Score : " + GetPassingScore().ToString();
+           failedCanvas.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = text;
            failedCanvas.gameObject.SetActive(true);
            passedCanvas.gameObject.SetActive(false);
         }
